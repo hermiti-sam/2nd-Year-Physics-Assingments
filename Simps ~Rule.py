@@ -46,7 +46,7 @@ def fresnelmenu():
 
             
 
-#############################################################################
+#############################################################################    
 def Simpson1D(x1, x2, z, x, N, lam):
     """function for performing numerical integration in the 1D case shown in
     pdf, it performs the integral via simpsons rule, and then squares the
@@ -164,10 +164,10 @@ def xsimp(x1, x2, z, x, N):
     Even = 0 ### initialising variables 
     k = (2*np.pi) / (1e-6)
     C = (k * (1j)) / (2*z)  #defining our integral constants
-    upper = np.exp(C * (x - x2)**2)
-    lower = np.exp(C * (x - x1)**2)
+    bigboi = np.exp(C * (x - x2)**2)
+    smallboi = np.exp(C * (x - x1)**2)
     h = (x2 - x1) / N
-    ends = upper + lower #f(a) and f(b) from simpsons def (upper and lower bounds)
+    ends = bigboi + smallboi #f(a) and f(b) from simpsons def (upper and lower bounds)
     E0 = 1
     A = (k * E0) / (2 * np.pi * z)
     for i in range(N-1):
@@ -178,7 +178,8 @@ def xsimp(x1, x2, z, x, N):
         i+=1
     middle = Even + Odd
     simp = ((h/3) * (ends + middle))
-    return A * simp
+    bye = A * simp
+    return bye
    
 def ysimp(y_1, y_2, z, y, N):
     Odd = 0
@@ -198,7 +199,6 @@ def ysimp(y_1, y_2, z, y, N):
     middle = (Odd + Even)
     ysimp = ((h_y/3) * ((ends + middle)))
     return ysimp
-
 
 
 def diffrect():
@@ -221,7 +221,7 @@ def diffrect():
     plt.show()
 
 def diffsquare():
-    numpoints = 50
+    numpoints = 100
     y_low = -5e-3
     x_low = -5e-3
     x_up = 5e-3
@@ -285,4 +285,3 @@ def diffnearrect():
     
     plt.show()
 fresnelmenu()
-
